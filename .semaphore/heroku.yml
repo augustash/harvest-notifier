@@ -3,13 +3,13 @@ name: Deploy to Heroku
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 
 blocks:
   - name: Deploy
     task:
       secrets:
-        - name: fs-harvest-notifier-secrets
+        - name: ash-harvest-notifier-secrets
 
       prologue:
         commands:
@@ -24,5 +24,5 @@ blocks:
       jobs:
         - name: Deploy
           commands:
-            - git remote add heroku https://git.heroku.com/fs-harvest-notifier.git
+            - git remote add heroku https://git.heroku.com/ash-harvest-notifier.git
             - git push heroku -f $SEMAPHORE_GIT_BRANCH:master

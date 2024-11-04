@@ -1,90 +1,123 @@
-# Slack Reminder
+# Harvest Notifier
 
-[![Build Status](https://flatstack.semaphoreci.com/badges/harvest-notifier.svg)](https://flatstack.semaphoreci.com/projects/harvest-notifier)
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/fs/harvest-notifier)
+<!-- markdownlint-disable MD033 -->
+<div align="center">
+    <a href="https://augustash.com" target="_blank">
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="https://augustash.s3.amazonaws.com/logos/ash-inline-invert-500.png">
+            <source media="(prefers-color-scheme: light)" srcset="https://augustash.s3.amazonaws.com/logos/ash-inline-color-500.png">
+            <img alt="Shows a theme-dependent version of the AAI company logo." src="https://augustash.s3.amazonaws.com/logos/ash-inline-color-500.png">
+        </picture>
+    </a>
+</div>
 
-Slack Reminder is an integration between Harvest and Slack which automatically reminds users who forget to mark their working hours in Harvest.
+<div align="center">
+    <a href="https://augustash.semaphoreci.com/projects/harvest-notifier" target="_blank"><img src="https://augustash.semaphoreci.com/badges/harvest-notifier/branches/master.svg?style=shields&key=a4e5e3c5-b65b-4de2-bbbc-1756d2768995" alt="Build Status" /></a>
+    <a href="https://github.com/augustash/harvest-notifier/graphs/commit-activity" target="_blank"><img src="https://img.shields.io/badge/maintained%3F-yes-brightgreen.svg?style=flat-square" alt="Maintained - Yes" /></a>
+    <a href="https://opensource.org/licenses/MIT" target="_blank"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-blue.svg" /></a>
+</div>
 
-This is a Ruby 2.6.5 library for installation on Daily Heroku Scheduler.
-Notification is determined from Harvest API V2.
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/augustash/harvest-notifier)
+
+The Harvest Notifier app is an integration between Harvest and Slack which automatically reminds users who forget to mark their working hours in Harvest.
+
+## Information
+
+- This is a Ruby 3.3.5 application.
+- Meant for installation on Heroku triggered by Daily Heroku Scheduler.
+- Notification is determined by time data from the Harvest V2 API.
 
 ## Features
 
-There are 2 types of reports: Daily and Weekly.
+There are two types of reports: **Daily** and **Weekly**.
 
-- Daily Report is generated on weekdays (except Monday) and shows those users who did not fill in their time for that day.
+- The **Daily Report** is generated on all weekdays (except Monday) and shows those users who did not fill in their time for that day.
+- The **Weekly Report** is generated every Monday and shows those users who still need to report the required working hours for previous week.
 
-- Weekly Report is generated every Monday and shows those users who still need to report the required working hours for last week.
+This app integration allows:
 
-This integration allows to:
-- mention users in the Slack
-- refresh report result
-- quickly report the working hours from the link
-- set up custom report schedule
-- configure a whitelist which consists of users, who don't need to be notified in Slack
+- Configure a whitelist of Harvest users who don't need to be notified in Slack.
+- Mention users in the Slack channel.
+- Quickly report the working hours from the included link.
+- Refresh report results.
+- Set up a custom report schedule.
 
 ![Example](https://user-images.githubusercontent.com/49876756/86122099-e32be700-badf-11ea-8c0a-7cd86d047948.png)
 
 ## Quick Start
 
-1. Prepare access tokens
-  * Create Personal Access Tokens on [Harvest](https://id.getharvest.com/developers).
+### Prepare integration access tokens
 
-  * Create [Slack app](https://api.slack.com/apps). You can find official guide [here](https://slack.com/intl/en-ru/resources/using-slack/app-launch).
-  * Create Bot User OAuth Access Token
-  * Add following scopes to Bot:
-      ```bash
-      chat:write
-      users:read
-      users:read.email
-      ```
-  * Add app to Slack channel.
+- Create a [Personal Access Token](https://id.getharvest.com/developers) on [Harvest](https://getharvest.com).
+- Create a [Slack app](https://api.slack.com/apps). You may want to [follow the official guide](https://slack.com/intl/en-ru/resources/using-slack/app-launch).
+- Add the following scopes to OAuth & Permissions > Bot Token Scopes:
 
-2. [Deploy to Heroku](https://heroku.com/deploy?template=https://github.com/fs/harvest-notifier)
-
-3. Configure following ENV variables
     ```bash
-    heroku config:set HARVEST_TOKEN=harvest-token
-    heroku config:set HARVEST_ACCOUNT_ID=harvest-account-id
-    heroku config:set SLACK_TOKEN=slack-bot-token
-    heroku config:set SLACK_CHANNEL=slack-channel
-    heroku config:set EMAILS_WHITELIST=user1@example.com, user2@example.com, user3@example.com
-    # EMAILS_WHITELIST is a variable that lists emails separated by commas, which don't need to be notified in Slack.
-    # For example, administrators or managers.
-    heroku config:set MISSING_HOURS_THRESHOLD=1.0
-    # MISSING_HOURS_THRESHOLD is a variable that indicates the minimum threshold of hours at which the employee will not be notified in Slack.
-    # For example, 2.5 or 4. The default threshold is 1 hour. Leave empty if satisfied with the default value.
+    chat:write
+    users:read
+    users:read.email
     ```
 
-4. Add job in Heroku Scheduler
+- Install the App to your Workspace.
+  - Generates a Bot User OAuth Token.
 
-  * ```bin/rake reports:daily``` for daily report
-  * ```bin/rake reports:weekly``` for weekly report
+### Deploy to Heroku
 
+The easiest way to deploy this app is to [use the Heroku button](https://heroku.com/deploy?template=https://github.com/augustash/harvest-notifier).
 
-## Support
+### Configure ENV Variables
 
-  If you have any questions or suggestions, send an issue, we will try to help you
+```bash
+# heroku config:set EMAILS_WHITELIST=harvest@augustash.com
+# EMAILS_WHITELIST is a list of emails separated by commas, which don't need to be notified in Slack.
+heroku config:set HARVEST_ACCOUNT_ID=harvest-account-id
+heroku config:set HARVEST_TOKEN=harvest-token
+heroku config:set HARVEST_URL=https://augustash.harvestapp.com
+# MISSING_HOURS_THRESHOLD indicates the minimum threshold of hours at which the employee will not be notified in Slack.
+heroku config:set MISSING_HOURS_THRESHOLD=4.0
+heroku config:set SLACK_CHANNEL=slack-notifications-channel
+heroku config:set SLACK_TOKEN=slack-bot-user-oauth-token
+heroku config:set EMAILS_WHITELIST=user1@example.com, user2@example.com, user3@example.com
+# ROLLBAR_ACCESS_TOKEN is a token for Rollbar error tracking.
+# heroku config:set ROLLBAR_ACCESS_TOKEN=rollbar-access-token
+# SNITCH_DAILY is a token for Dead Man Snitch to monitor Heroku Scheduler runs.
+# heroku config:set SNITCH_DAILY=dead-mean-snitch-access-token
+```
+
+### Configure Heroku Scheduler
+
+- ```bin/rake reports:daily``` for daily report
+- ```bin/rake reports:weekly``` for weekly report
 
 ## Quality tools
 
-* `bin/quality` based on [RuboCop](https://github.com/bbatsov/rubocop)
-* `.rubocop.yml` describes active checks
+- `bin/quality` based on [RuboCop](https://github.com/bbatsov/rubocop)
+- `.rubocop.yml` describes active checks
 
-## Develop
+## Local Development
 
-1. Сlone repo
+### Сlone the GitHub Repo
+
 ```bash
-git clone git@github.com:fs/harvest-notifier.git
+git clone git@github.com:augustash/harvest-notifier.git
 cd harvest-notifier
 ```
 
-2. Setup project
+### Prepare and Run the Environment
+
+```bash
+docker build -t heroku-notifier .
+docker run -it -v .:/app --rm heroku-notifier /bin/bash
+```
+
+### Setup Project
+
 ```bash
 bin/setup
 ```
 
-3. Check specs and run quality tools
+### Check Specs and Run Quality Tools
+
 ```bash
 bin/build
 ```
@@ -93,5 +126,3 @@ bin/build
 
 It was written by [Flatstack](http://www.flatstack.com) with the help of our
 [contributors](http://github.com/fs/ruby-base/contributors).
-
-[<img src="http://www.flatstack.com/logo.svg" width="100"/>](http://www.flatstack.com)

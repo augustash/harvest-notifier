@@ -1,0 +1,30 @@
+{
+    "display_information": {
+        "name": "Harvest Notifier",
+        "description": "Automatically notifies users in Slack to track and submit their time in Harvest.",
+        "background_color": "#2c2d30",
+        "long_description": "The Harvest Notifier app seamlessly integrates with Slack to help teams keep track of time entries in Harvest. It automatically sends reminders to users who forget to log their working hours, ensuring accurate and timely reporting. With customizable notifications and reminders, this app promotes accountability and helps prevent missed entries, making project tracking and time management easier for teams."
+    },
+    "features": {
+        "bot_user": {
+            "display_name": "Harvest Notifier",
+            "always_online": true
+        }
+    },
+    "oauth_config": {
+        "scopes": {
+            "bot": [
+                "chat:write",
+                "users:read",
+                "users:read.email",
+                "chat:write.public",
+                "channels:read"
+            ]
+        }
+    },
+    "settings": {
+        "org_deploy_enabled": false,
+        "socket_mode_enabled": false,
+        "token_rotation_enabled": false
+    }
+}

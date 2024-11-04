@@ -1,28 +1,22 @@
 version: v1.0
 name: ruby-base
-
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
-
 execution_time_limit:
   hours: 1
-
 auto_cancel:
   queued:
-    when: "true"
-
+    when: 'true'
 fail_fast:
   cancel:
-    when: "true"
-
+    when: 'true'
 global_job_config:
   prologue:
     commands:
       - checkout
       - cache restore
-
 blocks:
   - name: Setup
     task:
@@ -31,7 +25,6 @@ blocks:
           commands:
             - bundle install
             - cache store
-
   - name: Quality
     task:
       jobs:
@@ -39,19 +32,16 @@ blocks:
           commands:
             - bundle install
             - bin/quality
-
   - name: Test
     task:
       prologue:
         commands:
           - sem-version ruby 3.3.5
           - bundle install
-
       jobs:
         - name: Specs
           commands:
             - bundle exec rspec
-
 promotions:
   - name: Deploy to Heroku
     pipeline_file: heroku.yml

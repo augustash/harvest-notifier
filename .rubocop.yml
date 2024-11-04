@@ -2,6 +2,8 @@ require: rubocop-rspec
 
 AllCops:
   DisplayCopNames: true
+  NewCops: enable
+  SuggestExtensions: false
   Exclude:
     - bin/**/*
 
@@ -19,7 +21,7 @@ Metrics/BlockLength:
     - spec/**/*
 
 Style/Documentation:
-  Description: 'Document classes and non-namespace modules.'
+  Description: "Document classes and non-namespace modules."
   Enabled: false
 
 Style/MethodCalledOnDoEndBlock:
@@ -29,14 +31,14 @@ Style/CollectionMethods:
   Enabled: true
 
 Style/SymbolArray:
-  Description: 'Use %i or %I for arrays of symbols.'
+  Description: "Use %i or %I for arrays of symbols."
   Enabled: true
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
 Layout/LineLength:
-  Description: 'Limit lines to 120 characters.'
+  Description: "Limit lines to 120 characters."
   Max: 120
 
 Layout/EndAlignment:

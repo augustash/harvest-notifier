@@ -2,12 +2,13 @@
 
 source "https://rubygems.org"
 
-ruby "2.6.5"
+ruby "3.3.5"
 
 gem "activesupport"
 gem "dotenv"
 gem "httparty"
 gem "jbuilder"
+gem "ostruct"
 gem "rack"
 gem "rake"
 gem "rollbar"

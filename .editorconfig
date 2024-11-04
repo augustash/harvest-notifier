@@ -18,6 +18,10 @@ indent_size = 4
 indent_style = space
 trim_trailing_whitespace = false
 
+[*.rb]
+indent_size = 2
+indent_style = space
+
 [*.{js,sass,scss,yml,yaml}]
 indent_size = 2
 indent_style = space

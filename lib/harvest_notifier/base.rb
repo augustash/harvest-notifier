@@ -2,10 +2,10 @@
 
 require "active_support/core_ext/date/calculations"
 require "active_support/core_ext/date_and_time/calculations"
-
-require "harvest_notifier/report"
-require "harvest_notifier/notification"
+require "active_support/core_ext/object/blank"
 require "harvest_notifier/harvest"
+require "harvest_notifier/notification"
+require "harvest_notifier/report"
 require "harvest_notifier/slack"
 
 module HarvestNotifier

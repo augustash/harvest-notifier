@@ -2,10 +2,9 @@
 
 require "active_support/core_ext/module/delegation"
 require "active_support/core_ext/string/inflections"
-
+require "harvest_notifier/templates/congratulation"
 require "harvest_notifier/templates/daily_report"
 require "harvest_notifier/templates/weekly_report"
-require "harvest_notifier/templates/congratulation"
 
 module HarvestNotifier
   class Notification

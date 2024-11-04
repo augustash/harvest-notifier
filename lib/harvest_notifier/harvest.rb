@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require "httparty"
 require "active_support/core_ext/object/to_query"
+require "httparty"
 
 module HarvestNotifier
   class Harvest
     include HTTParty
 
-    base_uri "https://api.harvestapp.com/api/v2"
-    logger ::Logger.new STDOUT
+    base_uri "https://api.harvestapp.com/v2"
+    logger ::Logger.new $stdout
 
     def initialize(token, account_id)
       headers = { "Authorization" => "Bearer #{token}", "Harvest-Account-Id" => account_id }

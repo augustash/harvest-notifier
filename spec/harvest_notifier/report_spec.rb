@@ -164,7 +164,7 @@ describe HarvestNotifier::Report do
     end
 
     it "returns array of users" do
-      expect(report.weekly(from, to)).to be_a_kind_of(Array)
+      expect(report.weekly(from, to)).to be_a(Array)
     end
 
     it "returns John Smith with missing 5 hours and empty Slack id" do

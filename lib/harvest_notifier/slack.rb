@@ -8,7 +8,7 @@ module HarvestNotifier
 
     base_uri "https://slack.com/api"
     headers "Content-type" => "application/json"
-    logger ::Logger.new STDOUT
+    logger ::Logger.new $stdout
 
     def initialize(token)
       self.class.headers "Authorization" => "Bearer #{token}"

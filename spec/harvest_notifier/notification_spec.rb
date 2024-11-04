@@ -8,7 +8,7 @@ describe HarvestNotifier::Notification do
   let(:update_url) { nil }
   let(:template) { HarvestNotifier::Templates::Base }
   let(:template_name) { :base }
-  let(:assigns) { { users: [{ "email": "john.doe@example.com" }] } }
+  let(:assigns) { { users: [{ email: "john.doe@example.com" }] } }
   let(:template_body) { "Hello!" }
 
   before do

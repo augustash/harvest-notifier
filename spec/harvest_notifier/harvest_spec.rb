@@ -11,7 +11,7 @@ describe HarvestNotifier::Harvest do
     let(:harvest_users_list) { fixture("harvest_users_list") }
 
     before do
-      stub_request(:get, "https://api.harvestapp.com/api/v2/users.json")
+      stub_request(:get, "https://api.harvestapp.com/v2/users.json")
         .with(headers: headers)
         .to_return(body: harvest_users_list.to_json)
     end
@@ -29,7 +29,7 @@ describe HarvestNotifier::Harvest do
     let(:query) { "?from=#{from.strftime('%Y%m%d')}&to=#{to.strftime('%Y%m%d')}" }
 
     before do
-      stub_request(:get, "https://api.harvestapp.com/api/v2/reports/time/team.json#{query}")
+      stub_request(:get, "https://api.harvestapp.com/v2/reports/time/team.json#{query}")
         .with(headers: headers)
         .to_return(body: time_report_list.to_json)
     end

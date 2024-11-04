@@ -27,6 +27,7 @@ describe HarvestNotifier::Harvest do
 
   describe "#time_report_list" do
     let(:query) { "?from=#{from.strftime('%Y%m%d')}&to=#{to.strftime('%Y%m%d')}" }
+    let(:date_range) { { from: from, to: to } }
 
     before do
       stub_request(:get, "https://api.harvestapp.com/v2/reports/time/team.json#{query}")
@@ -34,34 +35,34 @@ describe HarvestNotifier::Harvest do
         .to_return(body: time_report_list.to_json)
     end
 
+    # rubocop:disable RSpec/MultipleMemoizedHelpers
     context "when daily time report" do
       let(:from) { Date.new(2020, 4, 15) }
       let(:to) { Date.new(2020, 4, 15) }
-
       let(:time_report_list) { fixture("harvest_daily_time_report") }
 
       it "success" do
-        expect(harvest.time_report_list(from, to)).to be_success
+        expect(harvest.time_report_list(date_range[:from], date_range[:to])).to be_success
       end
 
       it "returns daily report" do
-        expect(harvest.time_report_list(from, to)).to include("results")
+        expect(harvest.time_report_list(date_range[:from], date_range[:to])).to include("results")
       end
     end
 
     context "when weekly time report" do
       let(:from) { Date.new(2020, 4, 13) }
       let(:to) { Date.new(2020, 4, 17) }
-
       let(:time_report_list) { fixture("harvest_weekly_time_report") }
 
       it "success" do
-        expect(harvest.time_report_list(from, to)).to be_success
+        expect(harvest.time_report_list(date_range[:from], date_range[:to])).to be_success
       end
 
       it "returns weekly report" do
-        expect(harvest.time_report_list(from, to)).to include("results")
+        expect(harvest.time_report_list(date_range[:from], date_range[:to])).to include("results")
       end
     end
+    # rubocop:enable RSpec/MultipleMemoizedHelpers
   end
 end

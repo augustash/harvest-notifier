@@ -80,8 +80,8 @@ heroku config:set SLACK_TOKEN=slack-bot-user-oauth-token
 heroku config:set EMAILS_WHITELIST=user1@example.com, user2@example.com, user3@example.com
 # ROLLBAR_ACCESS_TOKEN is a token for Rollbar error tracking.
 # heroku config:set ROLLBAR_ACCESS_TOKEN=rollbar-access-token
-# SNITCH_DAILY is a token for Dead Man Snitch to monitor Heroku Scheduler runs.
-# heroku config:set SNITCH_DAILY=dead-mean-snitch-access-token
+# DEADMANSSNITCH_API_KEY is a token for Dead Man Snitch to monitor Heroku Scheduler runs.
+# heroku config:set DEADMANSSNITCH_API_KEY=dead-mean-snitch-access-token
 ```
 
 ### Configure Heroku Scheduler

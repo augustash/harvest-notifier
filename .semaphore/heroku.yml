@@ -22,4 +22,4 @@ blocks:
             - 'git remote add heroku https://git.heroku.com/ash-harvest-notifier.git'
             - 'git push heroku -f $SEMAPHORE_GIT_BRANCH:master'
     run:
-      when: tag =~ '.*' and change_in('/lib')
+      when: tag =~ '.*'

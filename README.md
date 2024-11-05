@@ -72,7 +72,8 @@ The easiest way to deploy this app is to [use the Heroku button](https://heroku.
 # EMAILS_WHITELIST is a list of emails separated by commas, which don't need to be notified in Slack.
 heroku config:set HARVEST_ACCOUNT_ID=harvest-account-id
 heroku config:set HARVEST_TOKEN=harvest-token
-heroku config:set HARVEST_URL=https://augustash.harvestapp.com
+# HARVEST_URL is the link used when clicking on the "Report Time" button in Slack.
+heroku config:set HARVEST_URL=https://augustash.harvestapp.com/time
 # MISSING_HOURS_THRESHOLD indicates the minimum threshold of hours at which the employee will not be notified in Slack.
 heroku config:set MISSING_HOURS_THRESHOLD=4.0
 heroku config:set SLACK_CHANNEL=slack-notifications-channel

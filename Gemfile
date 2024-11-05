@@ -24,3 +24,7 @@ group :development do
   gem "timecop"
   gem "webmock"
 end
+
+gem "rackup", "~> 2.2"
+
+gem "webrick", "~> 1.9"

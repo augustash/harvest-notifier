@@ -10,12 +10,12 @@ namespace :reports do
   desc "This task send report for the last week"
   task :weekly do
     HarvestNotifier.create_weekly_report
-    Snitcher.snitch(ENV["SNITCH_DAILY"]) if ENV["SNITCH_DAILY"]
+    Snitcher.snitch(ENV.fetch("DEADMANSSNITCH_API_KEY")) if ENV.fetch("DEADMANSSNITCH_API_KEY")
   end
 
   desc "This task send report for the past day"
   task :daily do
     HarvestNotifier.create_daily_report
-    Snitcher.snitch(ENV["SNITCH_DAILY"]) if ENV["SNITCH_DAILY"]
+    Snitcher.snitch(ENV.fetch("DEADMANSSNITCH_API_KEY")) if ENV.fetch("DEADMANSSNITCH_API_KEY")
   end
 end

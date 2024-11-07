@@ -85,10 +85,24 @@ heroku config:set EMAILS_WHITELIST=user1@example.com, user2@example.com, user3@e
 # heroku config:set DEADMANSSNITCH_API_KEY=dead-mean-snitch-access-token
 ```
 
+### Configure Add-ons
+
+```bash
+heroku addons:create deadmanssnitch:the-lone-snitch -a <app-name>
+heroku addons:create rollbar:trial-5k -a <app-name>
+heroku addons:create scheduler:standard -a <app-name>
+```
+
 ### Configure Heroku Scheduler
 
 - ```bin/rake reports:daily``` for daily report
 - ```bin/rake reports:weekly``` for weekly report
+
+For more fine-grained control, edit the `Clockfile` and enable a clock dyno:
+
+```bash
+heroku ps:scale clock=1 -a <app-name>
+```
 
 ## Quality tools
 

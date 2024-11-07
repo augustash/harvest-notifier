@@ -28,3 +28,5 @@ end
 gem "rackup", "~> 2.2"
 
 gem "webrick", "~> 1.9"
+
+gem "ruby-clock", "~> 2.0"

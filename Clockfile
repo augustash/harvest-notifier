@@ -1,0 +1,16 @@
+using RubyClock::DSL
+
+require 'rake'
+
+Rake.application.init
+Rake.application.load_rakefile
+
+# run daily reports every 4 hours on weekdays between 8am & 5pm CST
+cron '0 14-22/4 * * 1-5' do
+    Rake.application.invoke_task('reports:daily')
+end
+
+# run weekly reports on Monday at 10am CST
+cron '0 16 * * 1' do
+    Rake.application.invoke_task('reports:weekly')
+end

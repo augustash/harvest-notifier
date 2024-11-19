@@ -5,12 +5,17 @@ require 'rake'
 Rake.application.init
 Rake.application.load_rakefile
 
-# run daily reports every 4 hours on weekdays between 8am & 5pm CST
-cron '0 12-24/4 * * 1-5' do
+# run daily reports in the morning at 8:05am CST (M-F)
+cron '5 14 * * 1-5' do
+    Rake.application.invoke_task('reports:daily')
+end
+
+# run daily reports in the afternoon at 3:50pm CST (M-F)
+cron '55 21 * * 1-5' do
     Rake.application.invoke_task('reports:daily')
 end
 
 # run weekly reports on Monday at 10am CST
-cron '0 16 * * 1' do
-    Rake.application.invoke_task('reports:weekly')
-end
+# cron '0 16 * * 1' do
+#     Rake.application.invoke_task('reports:weekly')
+# end

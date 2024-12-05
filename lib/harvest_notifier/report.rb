@@ -23,7 +23,7 @@ module HarvestNotifier
       users = with_slack(with_reports(report))
 
       filter(users) do |user|
-        not_notifiable?(user) || time_reported?(user)
+        not_notifiable?(user) || time_threshold_reported?(user)
       end
     end
 
@@ -106,6 +106,10 @@ module HarvestNotifier
 
     def time_reported?(user)
       user["total_hours"].positive?
+    end
+
+    def time_threshold_reported?(user)
+      user["total_hours"].positive? && user["total_hours"] >= missing_hours_threshold
     end
 
     def full_time_reported?(user)

@@ -16,6 +16,9 @@ module HarvestNotifier
 
       @emails_whitelist = ENV.fetch("EMAILS_WHITELIST", "").split(",").map(&:strip)
       @missing_hours_threshold = ENV.fetch("MISSING_HOURS_THRESHOLD", 1.0).to_f
+
+      @cyle_email = ENV.fetch("CYLE_EMAIL", "")
+      @cyle_slack_id = ENV.fetch("CYLE_SLACK_ID", "")
     end
 
     def daily(date = Date.yesterday)
@@ -88,6 +91,7 @@ module HarvestNotifier
     end
 
     def slack_id(user)
+      return @cyle_slack_id if user["email"] == @cyle_email
       return "" unless slack_users.include?(user["email"])
 
       slack_users[user["email"]]["id"]
